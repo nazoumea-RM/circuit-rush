@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -243,7 +243,7 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
     get(k,d){ try{ const v = localStorage.getItem('hlba-'+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
     set(k,v){ try{ localStorage.setItem('hlba-'+k, JSON.stringify(v)); }catch(e){} }
   };
-  let lang = store.get('lang', 'ar'); if (!T[lang]) lang = 'ar';
+  let lang = store.get('lang', 'en'); if (!T[lang]) lang = 'en';
   const t = k => T[lang][k] ?? k;
 
   const $ = id => document.getElementById(id);
@@ -253,7 +253,7 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
     document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
     document.querySelectorAll('.lang').forEach(box => {
       box.innerHTML = '';
-      [['ar','العربية'],['en','English'],['fr','Français']].forEach(([code,label]) => {
+      [['en','English'],['ar','العربية'],['fr','Français']].forEach(([code,label]) => {
         const b = document.createElement('button');
         b.textContent = label; b.setAttribute('aria-pressed', code===lang);
         b.onclick = () => { lang = code; store.set('lang', lang); applyLang(); };
