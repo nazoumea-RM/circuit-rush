@@ -16,7 +16,7 @@ class CircuitRushApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'سباق الحلبة',
+      title: 'Circuit Rush',
       debugShowCheckedModeBanner: false,
       home: GameScreen(),
     );
