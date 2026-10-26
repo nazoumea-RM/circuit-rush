@@ -10,7 +10,7 @@ fi
 
 MANIFEST=android/app/src/main/AndroidManifest.xml
 # App name shown under the icon
-sed -i.bak 's/android:label="[^"]*"/android:label="سباق الحلبة"/' "$MANIFEST"
+sed -i.bak 's/android:label="[^"]*"/android:label="Circuit Rush"/' "$MANIFEST"
 # Internet permission (for the game fonts)
 if ! grep -q 'android.permission.INTERNET' "$MANIFEST"; then
   sed -i.bak 's#<application#<uses-permission android:name="android.permission.INTERNET"/> <application#' "$MANIFEST"
