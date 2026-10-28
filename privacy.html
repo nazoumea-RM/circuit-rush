@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سياسة الخصوصية · سباق الحلبة</title>
+<meta name="description" content="Privacy policy for the Circuit Rush racing game (سباق الحلبة).">
+<style>
+/* Layout: a single readable column; a checkered strip and a three-fact summary open the page, numbered sections follow (the numbers match the policy's own clauses). System fonts only, so the page itself contacts no third party. */
+:root{
+  --bg:#f7f5fb; --surface:#ffffff; --ink:#1d1430; --muted:#5d5470; --line:#e3ddef;
+  --accent:#c2185b; --accent-2:#0b7fa3; --ok:#14834a; --ok-bg:#e4f5ea;
+  --font:"Segoe UI",Tahoma,"Noto Sans Arabic","Noto Sans",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#150c26; --surface:#1f1435; --ink:#f3eefc; --muted:#b9add2; --line:#352a4f;
+  --accent:#ff5fa2; --accent-2:#3fd4f5; --ok:#4fe08e; --ok-bg:#163a28; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#150c26; --surface:#1f1435; --ink:#f3eefc; --muted:#b9add2; --line:#352a4f;
+  --accent:#ff5fa2; --accent-2:#3fd4f5; --ok:#4fe08e; --ok-bg:#163a28; color-scheme:dark }
+*,*::before,*::after{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.75}
+.strip{height:10px;background:repeating-linear-gradient(90deg,var(--ink) 0 14px,var(--bg) 14px 28px)}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.app{font-weight:800;color:var(--accent);letter-spacing:.02em}
+.lang{display:flex;gap:6px;direction:ltr}
+.lang button{font:inherit;font-size:14px;font-weight:700;background:var(--surface);color:var(--muted);border:1.5px solid var(--line);border-radius:999px;padding:3px 14px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lang button:focus-visible,a:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+h1{font-size:clamp(28px,6vw,40px);line-height:1.2;margin:0;text-wrap:balance}
+.date{color:var(--muted);font-size:14px;margin:4px 0 0}
+.intro{margin:0;font-size:17px;max-width:65ch}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.facts li{background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:10px 12px;font-weight:700;font-size:14px;line-height:1.4;display:flex;gap:8px;align-items:flex-start;min-width:0}
+.facts li::before{content:"✓";font-weight:900}
+@media (max-width:520px){.facts{grid-template-columns:1fr}}
+.sections{display:flex;flex-direction:column;gap:14px;margin:0;padding:0;list-style:none;counter-reset:s}
+.sections > li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;counter-increment:s;min-width:0}
+.sections h2{margin:0 0 6px;font-size:18px;display:flex;gap:10px;align-items:baseline}
+.sections h2::before{content:counter(s);font-variant-numeric:tabular-nums;color:var(--accent);font-weight:900}
+.sections p{margin:0;max-width:65ch}
+.sections p + p{margin-top:8px}
+.sections ul{margin:6px 0 0;padding-inline-start:20px}
+.mail{font-weight:800;color:var(--accent-2);direction:ltr;unicode-bidi:isolate;user-select:all}
+a{color:var(--accent-2)}
+footer{color:var(--muted);font-size:13px;text-align:center}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="strip" aria-hidden="true"></div>
+<main class="wrap">
+  <div class="top">
+    <span class="app">سباق الحلبة · Circuit Rush</span>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-l="ar" aria-pressed="true">العربية</button>
+      <button data-l="en" aria-pressed="false">English</button>
+      <button data-l="fr" aria-pressed="false">Français</button>
+    </div>
+  </div>
+
+  <!-- ===================== العربية ===================== -->
+  <article lang="ar" dir="rtl" data-lang="ar">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <header>
+        <h1>سياسة الخصوصية</h1>
+        <p class="date">آخر تحديث: 28 أكتوبر 2026</p>
+      </header>
+      <p class="intro">تشرح هذه الصفحة كيف تتعامل لعبة «سباق الحلبة» (Circuit Rush) مع معلوماتك. اللعبة من تطوير عبد الجليل نزوم. باختصار: اللعبة لا تجمع أي بيانات شخصية، ولا ترسل أي شيء خارج جهازك.</p>
+      <ul class="facts">
+        <li>لا نجمع أي بيانات شخصية</li>
+        <li>لا إعلانات ولا تتبع</li>
+        <li>التطبيق يعمل دون إنترنت</li>
+      </ul>
+      <ol class="sections">
+        <li><h2>المعلومات التي نجمعها</h2>
+          <p>لا نجمع أي معلومات شخصية. لا تطلب اللعبة إنشاء حساب، ولا تسأل عن اسمك أو بريدك الإلكتروني أو رقم هاتفك، ولا تصل إلى موقعك أو صورك أو جهات الاتصال أو الكاميرا أو الميكروفون.</p></li>
+        <li><h2>البيانات المحفوظة على جهازك</h2>
+          <p>تحفظ اللعبة المعلومات التالية على جهازك فقط، لكي تجدها عندما تعود للعب:</p>
+          <ul><li>أفضل نتيجة وعدد القطع</li><li>السيارات التي اشتريتها والسيارة المختارة</li><li>تقدّم المهمات اليومية</li><li>اللغة وإعدادات الصوت والموسيقى</li></ul>
+          <p>هذه المعلومات لا تغادر جهازك، ولا نستطيع الاطلاع عليها.</p></li>
+        <li><h2>الإنترنت والأطراف الثالثة</h2>
+          <p>تطبيق Android يعمل دون اتصال بالإنترنت ولا يطلب صلاحية الإنترنت. لا يحتوي على إعلانات، ولا على أدوات تحليل أو تتبع، ولا على أي مكتبة من طرف ثالث تجمع البيانات.</p>
+          <p>النسخة التي تُلعب في متصفح الويب تحمّل الخطوط من خدمة Google Fonts، وهذه الخدمة تتلقى عنوان IP الخاص بك كما يحدث مع أي موقع. يمكنك الاطلاع على <a href="https://policies.google.com/privacy" rel="noopener">سياسة خصوصية Google</a>.</p></li>
+        <li><h2>الصلاحيات</h2>
+          <p>لا يطلب التطبيق أي صلاحية خاصة على هاتفك.</p></li>
+        <li><h2>الأطفال</h2>
+          <p>اللعبة مناسبة لجميع الأعمار. وبما أننا لا نجمع أي بيانات، فإننا لا نجمع بيانات من الأطفال أيضاً.</p></li>
+        <li><h2>حذف بياناتك</h2>
+          <p>يمكنك حذف كل بياناتك في أي وقت بإحدى هذه الطرق: من شاشة «الخصوصية» داخل اللعبة عبر زر «مسح المعلومات ديالي»، أو بمسح بيانات التطبيق من إعدادات الهاتف، أو بحذف التطبيق.</p></li>
+        <li><h2>تغيير هذه السياسة</h2>
+          <p>إذا تغيّرت هذه السياسة، سننشر النسخة الجديدة في هذه الصفحة مع تاريخ التحديث.</p></li>
+        <li><h2>التواصل</h2>
+          <p>لأي سؤال حول الخصوصية، راسلنا على: <span class="mail">nazoumea@gmail.com</span></p></li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- ===================== English ===================== -->
+  <article lang="en" dir="ltr" data-lang="en" hidden>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <header>
+        <h1>Privacy Policy</h1>
+        <p class="date">Last updated: 28 October 2026</p>
+      </header>
+      <p class="intro">This page explains how the game Circuit Rush (سباق الحلبة) handles your information. The game is developed by Abdeljalil Nazoume. In short: the game collects no personal data and sends nothing off your device.</p>
+      <ul class="facts">
+        <li>No personal data collected</li>
+        <li>No ads, no tracking</li>
+        <li>The app works offline</li>
+      </ul>
+      <ol class="sections">
+        <li><h2>Information we collect</h2>
+          <p>We collect no personal information. The game does not ask you to create an account, does not ask for your name, email address or phone number, and does not access your location, photos, contacts, camera or microphone.</p></li>
+        <li><h2>Data stored on your device</h2>
+          <p>The game saves the following only on your device, so it is there when you come back:</p>
+          <ul><li>Best score and coin balance</li><li>Cars you have bought and the car you selected</li><li>Daily mission progress</li><li>Language, sound and music settings</li></ul>
+          <p>This information never leaves your device, and we cannot see it.</p></li>
+        <li><h2>Internet and third parties</h2>
+          <p>The Android app works offline and does not request internet access. It contains no ads, no analytics or tracking tools, and no third-party library that collects data.</p>
+          <p>The version played in a web browser loads its fonts from Google Fonts, which receives your IP address as happens with any website. See <a href="https://policies.google.com/privacy" rel="noopener">Google’s privacy policy</a>.</p></li>
+        <li><h2>Permissions</h2>
+          <p>The app does not request any special permission on your phone.</p></li>
+        <li><h2>Children</h2>
+          <p>The game is suitable for all ages. Because we collect no data at all, we collect no data from children either.</p></li>
+        <li><h2>Deleting your data</h2>
+          <p>You can delete all your data at any time: from the Privacy screen in the game with the “Erase my data” button, by clearing the app’s data in your phone settings, or by uninstalling the app.</p></li>
+        <li><h2>Changes to this policy</h2>
+          <p>If this policy changes, we will publish the new version on this page with its update date.</p></li>
+        <li><h2>Contact</h2>
+          <p>For any privacy question, write to: <span class="mail">nazoumea@gmail.com</span></p></li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- ===================== Français ===================== -->
+  <article lang="fr" dir="ltr" data-lang="fr" hidden>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <header>
+        <h1>Politique de confidentialité</h1>
+        <p class="date">Dernière mise à jour : 28 octobre 2026</p>
+      </header>
+      <p class="intro">Cette page explique comment le jeu Course du Circuit (Circuit Rush, سباق الحلبة) traite tes informations. Le jeu est développé par Abdeljalil Nazoume. En bref : le jeu ne collecte aucune donnée personnelle et n’envoie rien en dehors de ton appareil.</p>
+      <ul class="facts">
+        <li>Aucune donnée personnelle collectée</li>
+        <li>Pas de publicité ni de suivi</li>
+        <li>L’application fonctionne hors ligne</li>
+      </ul>
+      <ol class="sections">
+        <li><h2>Informations collectées</h2>
+          <p>Nous ne collectons aucune information personnelle. Le jeu ne demande pas de créer un compte, ne demande ni ton nom, ni ton e-mail, ni ton numéro de téléphone, et n’accède ni à ta localisation, ni à tes photos, ni à tes contacts, ni à la caméra, ni au micro.</p></li>
+        <li><h2>Données enregistrées sur ton appareil</h2>
+          <p>Le jeu enregistre uniquement sur ton appareil les informations suivantes, pour que tu les retrouves en revenant jouer :</p>
+          <ul><li>Meilleur score et nombre de pièces</li><li>Voitures achetées et voiture choisie</li><li>Progression des missions du jour</li><li>Langue, réglages du son et de la musique</li></ul>
+          <p>Ces informations ne quittent jamais ton appareil et nous ne pouvons pas les consulter.</p></li>
+        <li><h2>Internet et services tiers</h2>
+          <p>L’application Android fonctionne hors ligne et ne demande pas l’accès à Internet. Elle ne contient ni publicité, ni outil d’analyse ou de suivi, ni bibliothèque tierce qui collecte des données.</p>
+          <p>La version jouée dans un navigateur web charge ses polices depuis Google Fonts, qui reçoit ton adresse IP comme avec n’importe quel site. Voir la <a href="https://policies.google.com/privacy" rel="noopener">politique de confidentialité de Google</a>.</p></li>
+        <li><h2>Autorisations</h2>
+          <p>L’application ne demande aucune autorisation particulière sur ton téléphone.</p></li>
+        <li><h2>Enfants</h2>
+          <p>Le jeu convient à tous les âges. Comme nous ne collectons aucune donnée, nous n’en collectons pas non plus auprès des enfants.</p></li>
+        <li><h2>Supprimer tes données</h2>
+          <p>Tu peux supprimer toutes tes données à tout moment : depuis l’écran « Confidentialité » du jeu avec le bouton « Effacer mes données », en effaçant les données de l’application dans les réglages du téléphone, ou en désinstallant l’application.</p></li>
+        <li><h2>Modifications de cette politique</h2>
+          <p>Si cette politique change, nous publierons la nouvelle version sur cette page avec sa date de mise à jour.</p></li>
+        <li><h2>Contact</h2>
+          <p>Pour toute question sur la confidentialité, écris à : <span class="mail">nazoumea@gmail.com</span></p></li>
+      </ol>
+    </div>
+  </article>
+
+  <footer>© 2026 Abdeljalil Nazoume · سباق الحلبة · Circuit Rush</footer>
+</main>
+<script>
+(() => {
+  const titles = {ar:'سياسة الخصوصية · سباق الحلبة', en:'Privacy Policy · Circuit Rush', fr:'Politique de confidentialité · Circuit Rush'};
+  function setLang(l){
+    if (!titles[l]) l = 'ar';
+    document.querySelectorAll('article[data-lang]').forEach(a => a.hidden = a.dataset.lang !== l);
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+    document.documentElement.lang = l; document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+    document.title = titles[l];
+  }
+  document.querySelectorAll('.lang button').forEach(b => b.onclick = () => { setLang(b.dataset.l); try { history.replaceState(null,'','#'+b.dataset.l); } catch(e){} });
+  setLang((location.hash || '').slice(1));
+})();
+</script>
+</body>
+</html>
