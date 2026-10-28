@@ -45,6 +45,12 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (_) => setState(() => _loading = false),
+          // The game never leaves the app: any link to an outside page is blocked.
+          onNavigationRequest: (request) {
+            final url = request.url;
+            final local = url.startsWith('file:') || url.startsWith('about:') || url.startsWith('data:');
+            return local ? NavigationDecision.navigate : NavigationDecision.prevent;
+          },
         ),
       )
       ..loadFlutterAsset('assets/game/index.html');

@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}*,*::before,*::after{box-sizing:border-box}body{margin:0;font:14px system-ui,sans-serif}</style>
+<script>window.HLBA_APP = true;</script>
+<style>
+@font-face{font-family:"Lalezar";src:url("fonts/Lalezar-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Cairo";src:url("fonts/Cairo.ttf") format("truetype");font-weight:200 1000;font-display:swap}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}*,*::before,*::after{box-sizing:border-box}body{margin:0;font:14px system-ui,sans-serif}
+</style>
 <title>سباق الحلبة</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;800&display=swap">
 <style>
 /* Layout: full-screen canvas track, HUD band on top, touch pads at the bottom, overlay cards for menu / garage / pause / game over. Single vivid arcade look by choice. */
 :root{
@@ -87,6 +89,15 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
 .car-card button.sel{background:var(--cyan)}
 .car-card button:disabled{background:rgba(255,255,255,.12);color:var(--muted);cursor:default}
 .msg{min-height:1.4em;font-size:13px;color:var(--pink);font-weight:700}
+.linkbtn{background:none;border:0;color:var(--cyan);font-weight:800;font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px;align-self:center}
+.pv{margin:0;padding-inline-start:20px;text-align:start;display:flex;flex-direction:column;gap:7px;color:var(--ink);font-size:14px;line-height:1.6}
+.pv li::marker{color:var(--sun)}
+.pv-contact{font-size:13px}
+.pv-contact b{color:var(--ink);user-select:text;-webkit-user-select:text;direction:ltr;unicode-bidi:isolate}
+.pv-link{color:var(--cyan);font-weight:800;font-size:13px;text-underline-offset:3px}
+.del-ask{background:rgba(255,46,136,.1);border:1.5px solid rgba(255,46,136,.5);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.del-ask p{color:var(--ink)}
+.linkbtn:focus-visible,.pv-link:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 .missions{display:flex;flex-direction:column;gap:6px;text-align:start;background:rgba(34,228,255,.06);border:1.5px solid rgba(34,228,255,.3);border-radius:14px;padding:10px}
 .missions h3{margin:0;font-family:var(--display);font-weight:400;font-size:20px;color:var(--cyan);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .missions h3 small{font-family:var(--body);font-size:11px;color:var(--muted);font-weight:600}
@@ -151,6 +162,31 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
       <div class="row"><span><span data-t="best"></span>: <b class="bestV">0</b></span><span><span data-t="bank"></span>: <b class="bankV bank">0</b></span></div>
       <div class="missions"><h3><span data-t="missions"></span><small data-t="missionsHint"></small></h3><div class="misList" style="display:flex;flex-direction:column;gap:8px"></div></div>
       <p class="hint" data-t="controls"></p>
+      <button class="linkbtn" id="privacyBtn" data-t="privacy"></button>
+    </div>
+  </div>
+
+  <div class="overlay" id="privacyScreen" hidden>
+    <div class="card">
+      <div class="lang"></div>
+      <h2 data-t="pv_title"></h2>
+      <ul class="pv">
+        <li data-t="pv_1"></li>
+        <li data-t="pv_2"></li>
+        <li data-t="pv_3"></li>
+        <li id="pvNet" data-t="pv_net_web"></li>
+        <li data-t="pv_4"></li>
+        <li data-t="pv_5"></li>
+      </ul>
+      <p class="pv-contact"><span data-t="pv_contact"></span> <b>nazoumea@gmail.com</b></p>
+      <a class="pv-link" id="pvLink" href="https://nazoumea-rm.github.io/circuit-rush/privacy.html" target="_blank" rel="noopener" data-t="pv_full"></a>
+      <div class="btns" id="delRow"><button class="btn ghost" id="delBtn" data-t="del"></button></div>
+      <div class="del-ask" id="delAsk" hidden>
+        <p data-t="delAsk"></p>
+        <div class="btns"><button class="btn" id="delYes" data-t="delYes"></button><button class="btn ghost" id="delNo" data-t="cancel"></button></div>
+      </div>
+      <p class="msg" id="pvMsg" role="status" aria-live="polite"></p>
+      <div class="btns"><button class="btn alt" id="pvBack" data-t="back"></button></div>
     </div>
   </div>
 
@@ -211,7 +247,18 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
       missions:'مهمات اليوم',missionsHint:'كتبدل كل نهار',missionDone:'مهمة كملات!',
       boss:'البوس',bossIn:'البوس جا! جمع الصواريخ',bossDown:'غلبتي البوس!',rocket:'صاروخ',
       m_coinsTotal:'جمع {n} قطعة',m_giftsTotal:'جمع {n} هدية',m_levelRun:'وصل للمرحلة {n} ف سباق واحد',m_scoreRun:'دير {n} نقطة ف سباق واحد',
-      m_bossTotal:'غلب البوس {n} مرات',m_comboRun:'وصل لكومبو ×{n}',m_races:'لعب {n} سباقات',m_nitroTotal:'شد النيترو {n} مرات'},
+      m_bossTotal:'غلب البوس {n} مرات',m_comboRun:'وصل لكومبو ×{n}',m_races:'لعب {n} سباقات',m_nitroTotal:'شد النيترو {n} مرات',
+      privacy:'الخصوصية',pv_title:'الخصوصية ديالك',
+      pv_1:'ما كنجمعو حتى معلومة شخصية: لا حساب، لا سمية، لا إيميل، لا موقع.',
+      pv_2:'النتائج، القطع، الطوموبيلات والمهمات كيتسجلو غير ف الجهاز ديالك، وما كيتصيفطو لحتى سيرفر.',
+      pv_3:'ما كاين لا إشهارات، لا تتبع، لا إحصائيات.',
+      pv_net_web:'هاد النسخة ديال الويب كتحمل الخطوط من Google Fonts، وهاد الخدمة كتشوف عنوان IP ديالك بحال أي موقع.',
+      pv_net_app:'التطبيق كيخدم بلا إنترنت، وما كيطلب حتى صلاحية.',
+      pv_4:'تقدر تمسح كاع المعلومات ديالك بالزر اللي لتحت، ولا بحذف التطبيق.',
+      pv_5:'اللعبة مناسبة لجميع الأعمار.',
+      pv_contact:'للتواصل:',pv_full:'قرا السياسة الكاملة',
+      del:'مسح المعلومات ديالي',delAsk:'غادي يتمسحو النتائج، القطع، الطوموبيلات والمهمات، وما يمكنش ترجعهم. متأكد؟',
+      delYes:'نعم، مسح',cancel:'لا، رجوع',deleted:'تمسحات المعلومات ديالك.'},
     en:{title:'Circuit Rush',tagline:'Drive, dodge the hazards and grab the gifts. Every level brings a new track and more speed.',
       play:'Race',garage:'Garage',best:'Best',bank:'Your coins',score:'Score',coins:'Coins',level:'Level',speed:'km/h',
       coin:'Coin',gift:'Gift',shield:'Shield',nitro:'Nitro',magnet:'Magnet',heart:'Heart',star:'Star',obstacles:'Hazards',
@@ -224,7 +271,18 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
       missions:'Daily missions',missionsHint:'New ones every day',missionDone:'Mission complete!',
       boss:'Boss',bossIn:'Boss incoming! Grab the rockets',bossDown:'Boss defeated!',rocket:'Rocket',
       m_coinsTotal:'Collect {n} coins',m_giftsTotal:'Collect {n} gifts',m_levelRun:'Reach level {n} in one race',m_scoreRun:'Score {n} in one race',
-      m_bossTotal:'Defeat {n} bosses',m_comboRun:'Reach a ×{n} combo',m_races:'Play {n} races',m_nitroTotal:'Grab nitro {n} times'},
+      m_bossTotal:'Defeat {n} bosses',m_comboRun:'Reach a ×{n} combo',m_races:'Play {n} races',m_nitroTotal:'Grab nitro {n} times',
+      privacy:'Privacy',pv_title:'Your privacy',
+      pv_1:'We collect no personal information: no account, no name, no email, no location.',
+      pv_2:'Scores, coins, cars and missions are saved only on your device and are never sent to a server.',
+      pv_3:'No ads, no tracking, no analytics.',
+      pv_net_web:'This web version loads its fonts from Google Fonts, which sees your IP address like any website does.',
+      pv_net_app:'The app works offline and asks for no permissions.',
+      pv_4:'You can erase all your data with the button below, or by uninstalling the app.',
+      pv_5:'The game is suitable for all ages.',
+      pv_contact:'Contact:',pv_full:'Read the full policy',
+      del:'Erase my data',delAsk:'Your scores, coins, cars and missions will be erased. This cannot be undone. Are you sure?',
+      delYes:'Yes, erase',cancel:'No, go back',deleted:'Your data has been erased.'},
     fr:{title:'Course du Circuit',tagline:'Pilote, évite les obstacles et ramasse les cadeaux. Chaque niveau apporte un nouveau circuit et plus de vitesse.',
       play:'Course',garage:'Garage',best:'Record',bank:'Tes pièces',score:'Score',coins:'Pièces',level:'Niveau',speed:'km/h',
       coin:'Pièce',gift:'Cadeau',shield:'Bouclier',nitro:'Nitro',magnet:'Aimant',heart:'Cœur',star:'Étoile',obstacles:'Obstacles',
@@ -237,13 +295,24 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
       missions:'Missions du jour',missionsHint:'Nouvelles chaque jour',missionDone:'Mission accomplie !',
       boss:'Boss',bossIn:'Le boss arrive ! Ramasse les fusées',bossDown:'Boss vaincu !',rocket:'Fusée',
       m_coinsTotal:'Ramasse {n} pièces',m_giftsTotal:'Ramasse {n} cadeaux',m_levelRun:'Atteins le niveau {n} en une course',m_scoreRun:'Fais {n} points en une course',
-      m_bossTotal:'Bats {n} boss',m_comboRun:'Atteins un combo ×{n}',m_races:'Joue {n} courses',m_nitroTotal:'Prends la nitro {n} fois'}
+      m_bossTotal:'Bats {n} boss',m_comboRun:'Atteins un combo ×{n}',m_races:'Joue {n} courses',m_nitroTotal:'Prends la nitro {n} fois',
+      privacy:'Confidentialité',pv_title:'Ta vie privée',
+      pv_1:'Nous ne collectons aucune information personnelle : pas de compte, pas de nom, pas d’e-mail, pas de localisation.',
+      pv_2:'Les scores, pièces, voitures et missions sont enregistrés uniquement sur ton appareil et ne sont jamais envoyés à un serveur.',
+      pv_3:'Pas de publicité, pas de suivi, pas de statistiques.',
+      pv_net_web:'Cette version web charge ses polices depuis Google Fonts, qui voit ton adresse IP comme n’importe quel site.',
+      pv_net_app:'L’application fonctionne hors ligne et ne demande aucune autorisation.',
+      pv_4:'Tu peux effacer toutes tes données avec le bouton ci-dessous, ou en désinstallant l’application.',
+      pv_5:'Le jeu convient à tous les âges.',
+      pv_contact:'Contact :',pv_full:'Lire la politique complète',
+      del:'Effacer mes données',delAsk:'Tes scores, pièces, voitures et missions seront effacés. C’est définitif. Tu es sûr ?',
+      delYes:'Oui, effacer',cancel:'Non, retour',deleted:'Tes données ont été effacées.'}
   };
   const store = {
     get(k,d){ try{ const v = localStorage.getItem('hlba-'+k); return v===null ? d : JSON.parse(v); }catch(e){ return d; } },
     set(k,v){ try{ localStorage.setItem('hlba-'+k, JSON.stringify(v)); }catch(e){} }
   };
-  let lang = store.get('lang', 'en'); if (!T[lang]) lang = 'en';
+  let lang = store.get('lang', 'ar'); if (!T[lang]) lang = 'ar';
   const t = k => T[lang][k] ?? k;
 
   const $ = id => document.getElementById(id);
@@ -253,7 +322,7 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
     document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
     document.querySelectorAll('.lang').forEach(box => {
       box.innerHTML = '';
-      [['en','English'],['ar','العربية'],['fr','Français']].forEach(([code,label]) => {
+      [['ar','العربية'],['en','English'],['fr','Français']].forEach(([code,label]) => {
         const b = document.createElement('button');
         b.textContent = label; b.setAttribute('aria-pressed', code===lang);
         b.onclick = () => { lang = code; store.set('lang', lang); applyLang(); };
@@ -593,7 +662,7 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
   $('leftPad').addEventListener('pointerdown', e => { e.preventDefault(); move(-1); });
   $('rightPad').addEventListener('pointerdown', e => { e.preventDefault(); move(1); });
 
-  const screens = ['startScreen','garageScreen','pauseScreen','overScreen'];
+  const screens = ['startScreen','garageScreen','pauseScreen','overScreen','privacyScreen'];
   let garageFrom = 'startScreen';
   function show(id){ screens.forEach(s => $(s).hidden = s!==id); }
   function initAudio(){ try{ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); }catch(e){} }
@@ -602,6 +671,23 @@ p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
   $('garageBtn1').onclick = () => { initAudio(); garageFrom='startScreen'; $('garageMsg').textContent=''; renderGarage(); show('garageScreen'); };
   $('garageBtn2').onclick = () => { initAudio(); garageFrom='overScreen'; $('garageMsg').textContent=''; renderGarage(); show('garageScreen'); };
   $('garageBack').onclick = () => show(garageFrom);
+
+  // ----- privacy screen -----
+  const IS_APP = !!window.HLBA_APP;
+  $('pvNet').dataset.t = IS_APP ? 'pv_net_app' : 'pv_net_web';
+  $('pvLink').hidden = IS_APP;
+  $('pvNet').textContent = t($('pvNet').dataset.t);
+  const askDelete = on => { $('delAsk').hidden = !on; $('delRow').hidden = on; if (on) $('delNo').focus(); };
+  $('privacyBtn').onclick = () => { $('pvMsg').textContent=''; askDelete(false); show('privacyScreen'); };
+  $('pvBack').onclick = () => { askDelete(false); show('startScreen'); };
+  $('delBtn').onclick = () => askDelete(true);
+  $('delNo').onclick = () => askDelete(false);
+  $('delYes').onclick = () => {
+    try { Object.keys(localStorage).filter(k => k.startsWith('hlba-')).forEach(k => localStorage.removeItem(k)); } catch(e){}
+    bank = 0; best = 0; owned = ['bolt']; carId = 'bolt'; missions = null; ensureMissions();
+    refreshNumbers(); renderGarage(); renderMissions();
+    askDelete(false); $('pvMsg').textContent = t('deleted');
+  };
   $('pauseBtn').onclick = togglePause; $('resumeBtn').onclick = togglePause;
   $('quitBtn').onclick = () => { stopMusic(); missionEvent('scoreRun',Math.floor(g.score)); missionEvent('levelRun',g.level); bank += g.coins; store.set('bank',bank); renderMissions(); refreshNumbers(); state='menu'; $('pauseBtn').textContent='II'; reset(); demoScene(); show('startScreen'); };
   $('muteBtn').onclick = () => { muted=!muted; store.set('muted',muted); $('muteBtn').textContent = muted?'🔈':'🔊'; };
