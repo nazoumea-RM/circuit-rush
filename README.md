@@ -24,7 +24,7 @@
      ```
      git init && git add . && git commit -m "Circuit Rush"
      git branch -M main
-     git remote add origin https://github.com/USERNAME/circuit-rush.git
+     git remote add origin https://github.com/rmb-apps/circuit-rush.git
      git push -u origin main
      ```
 3. سير لـ **Actions**، غادي تلقى **Build APK** خدام (كياخد تقريبا 5 حتى 8 دقايق).
@@ -61,7 +61,7 @@ flutter build apk --release
 
 - سياسة الخصوصية بثلاث لغات كاينة ف `docs/privacy.html`.
 - باش يولي عندها رابط عمومي: **Settings → Pages**، ف **Branch** ختار `main` و `/docs`، ومن بعد **Save**.
-- الرابط: `https://nazoumea-rm.github.io/circuit-rush/privacy.html` (كاين حتى `#en` و `#fr`).
+- الرابط: `https://rmb-apps.github.io/circuit-rush/privacy.html` (كاين حتى `#en` و `#fr`).
 - هاد الرابط هو اللي كتحط ف Play Console، ف **Privacy policy**.
 - ف **Data safety** ف Play Console، جاوب بلي التطبيق **ما كيجمع حتى بيانات** وما كيشاركهم مع حد.
 
